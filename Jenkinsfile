@@ -1,30 +1,16 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                checkout scm
+                // Compile your Java code (e.g., javac MyJavaFile.java)
+                sh 'javac my-java-app.java'
             }
         }
-        stage('Build and Test') {
+        stage('Run') {
             steps {
-                sh 'javac Main.java'
-                sh 'java Main'
-            }
-        }
-        stage('Dockerize') {
-            steps {
-                sh 'docker build -t my-java-app .'
-            }
-        }
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(my_java_app: 'docker-hub-credentials', my_java_app: 'DOCKER_USERNAME', AbdullahNTG: 'DOCKER_PASSWORD')]) {
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker tag my-java-app my-java-app/my-java-app:latest'
-                    sh 'docker push my-java-app/my-java-app:latest'
-                }
+                // Execute your compiled Java code (e.g., java MyJavaFile)
+                sh 'java my-java-app'
             }
         }
     }
