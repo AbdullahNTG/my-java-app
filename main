@@ -1,0 +1,11 @@
+public class Main {
+    public static void main(String[] args) {
+        int inputNumber = 10; // Replace with your desired input
+        boolean isEven = checkIfInputIsAnEvenNumber(inputNumber);
+        System.out.println("Is " + inputNumber + " even? " + isEven);
+    }
+
+    public static boolean checkIfInputIsAnEvenNumber(int number) {
+        return number % 2 == 0;
+    }
+}
